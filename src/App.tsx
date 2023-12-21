@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import Navigation from './Navigation'
+import InvoiceModal from './InvoiceModal'
+import Home from './Home'
 
-function App() {
+const App = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      const screenWidth = window.innerWidth;
+      setIsMobile(screenWidth <= 750);
+    };
+
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isMobile ? (
+        <div className='text-center justify-center items-center h-screen bg-[#141625] text-white'>
+          <h2>sorry this app is not supported on mobile device</h2>
+          <p className='mt-[16px]'>To use this app pls use a computer or tablet</p>
+        </div>
+      ) : (<div className='bg-[#141625] flex min-h-screen flex-col  min-[900px]:flex-row'>
+        <Navigation />
+        <div className='p-[20px] flex[1] relative flex flex-col'>
+          <InvoiceModal />
+         
+        </div>
+        <Home />
+      </div>
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
