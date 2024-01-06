@@ -1,42 +1,70 @@
-import { useState, useEffect } from 'react'
-import Navigation from './Navigation'
-import InvoiceModal from './InvoiceModal'
-import Home from './Home'
+import {useEffect, useState} from 'react';
+import Header from './Header'
+import Sidebar from './Sidebar'
+import Feed from './Feed'
+import {ref, onValue} from 'firebase/database'
+import Wigets from './Wigets'
+// import { login, logout, selectUser } from './features/userSlice';
+// import { useDispatch, useSelector } from 'react-redux'
+// import Login from './Login';
+// import {auth} from './firebase';
+import './App.css'; 
 
-const App = () => {
-  const [isMobile, setIsMobile] = useState(false);
+function App({database}: {database: any}) {
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const checkScreenWidth = () => {
-      const screenWidth = window.innerWidth;
-      setIsMobile(screenWidth <= 750);
-    };
 
-    checkScreenWidth();
-    window.addEventListener('resize', checkScreenWidth);
-    return () => {
-      window.removeEventListener('resize', checkScreenWidth);
-    };
+    const postsRef = ref(database, 'posts');
+
+    onValue(postsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const postArray: any = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        setPosts(postArray)
+      } 
+    });
   }, []);
 
+  // const user = useSelector(selectUser);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((userAuth) => {
+  //     if (userAuth) {
+  //       dispatch(
+  //         login({
+  //           email: userAuth.email,
+  //           uid: userAuth.uid,
+  //           diplayName: userAuth.displayName,
+  //           photoUrl: userAuth.photoUrl,
+  //         })
+  //       );
+  //     } else {
+  //       dispatch(logout());
+  //     }
+  //   });
+  // }, []);
+  
   return (
-    <div>
-      {isMobile ? (
-        <div className='text-center justify-center items-center h-screen bg-[#141625] text-white'>
-          <h2>sorry this app is not supported on mobile device</h2>
-          <p className='mt-[16px]'>To use this app pls use a computer or tablet</p>
-        </div>
-      ) : (<div className='bg-[#141625] flex min-h-screen flex-col  min-[900px]:flex-row'>
-        <Navigation />
-        <div className='p-[20px] flex[1] relative flex flex-col'>
-          <InvoiceModal />
-         
-        </div>
-        <Home />
-      </div>
-      )}
+    <div className='bg-zinc-200 '>
+      <Header/>
+
+      {/* {!user ? (
+        <Login auth={auth}/>
+      ) : ( */}
+        <div className='flex mt-[35px] max-w-[1200px] ml-[20px] mr-[20px]'>
+          <Sidebar />
+          <Feed database={database} posts={posts} />
+          <Wigets />
+         </div>  
+       {/* )} */}
+      
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
