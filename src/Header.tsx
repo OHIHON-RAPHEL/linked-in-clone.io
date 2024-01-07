@@ -8,12 +8,15 @@ import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useDispatch } from 'react-redux';
 import { logout } from './features/userSlice';
+import { getAuth } from "firebase/auth"
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
 
   const logoutOfApp = () => {
-    dispatch(logout())
+    dispatch(logout());
+    const auth = getAuth();
+    auth.signOut()
   };
 
   return (

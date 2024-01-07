@@ -22,7 +22,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
 
     try {
       const newEntryData =  await push(postsRef, {
-        name: "raphking",
+        name: user.displayName,
         description: user.email,
         message: input,
         photoUrl: user.photoUrl || "",
@@ -31,10 +31,8 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
     }catch (error) {
         console.log(error);
     };
-
-    setInput("")
-
-  }
+    setInput("");
+  };
 
   return (
     <div className='flex-[0.4] m-[0 20px] mr-5'>
@@ -53,7 +51,6 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
            <InputOption Icon={CalendarViewDayIcon} title="Write article" color="blue"/>
         </div>
       </div>
-      {/* <FlipMove> */}
         {posts.map((posts: any, index: any) => {
           return <Post
             key={index}
@@ -62,8 +59,6 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
             message={posts.message}
           />
         })}
-      {/* </FlipMove> */}
-      
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { login } from './features/userSlice'
 import { useDispatch } from 'react-redux';
 
@@ -21,32 +21,39 @@ const Login: React.FC = () => {
           login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
-            displayName: name,
+            displayName: userAuth.user.displayName,
             photoUrl: userAuth.user.photoURL,
           })
         )
-      }).catch((error) => alert(error.message));
+      }).catch((error) => alert(error));
       console.log("User Logedin Sucessfully");
   };
 
+
   const register = () => {
-    if(!name || !password) {
-        return alert("please enter a full name");
-    };
+    if (!name || !password) {
+      return alert("Please enter a full name");
+    }
 
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)   
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
+        updateProfile(userAuth.user, {
+          displayName: name,
+          photoURL: profilePic,
+        }).then(() => {
           dispatch(
             login({
               email: userAuth.user.email,
               uid: userAuth.user.uid,
-              displayName: userAuth.user.displayName,
+              displayName: name,
               photoUrl: profilePic,
-          })
+            })
           );
-      }).catch((error) => alert(error.message));
-      console.log("User registered sucessfully!");
+          console.log("User registered successfully!");
+        });
+      })
+      .catch((error) => alert(error));
   };
 
   return (

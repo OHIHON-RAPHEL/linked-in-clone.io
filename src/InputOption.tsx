@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const InputOption = ({ Icon, title, color }: {Icon: any, title: string, color: string}) => {
   return (

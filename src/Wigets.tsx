@@ -19,9 +19,13 @@ const Wigets = () => {
   return (
     <div className='sticky top-20 flex-[0.2] bg-white rounded-md border-2 border-[1px_solid_lightgray] h-fit pb-2.5'>
       <div className='flex items-center justify-between p-2.5'>
-        <h2 className='text-lg font-normal text-[16px] '>Linkedin News</h2>
+        <h2 className='text-lg font-semibold text-[16px] '>Linkedin News</h2>
         <InfoIcon />
       </div>
+      <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
+      <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
+      <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
+      <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
       <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
       <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
       <NewsArticle heading={"Raphking React is back"} subtitle={"Top news 9099 readers"} />
