@@ -1,17 +1,39 @@
 import {useEffect, useState} from 'react';
 import Header from './Header'
 import Sidebar from './Sidebar'
+import Wigets from './Wigets'
 import Feed from './Feed'
 import {ref, onValue} from 'firebase/database'
-import Wigets from './Wigets'
-// import { login, logout, selectUser } from './features/userSlice';
-// import { useDispatch, useSelector } from 'react-redux'
-// import Login from './Login';
-// import {auth} from './firebase';
-import './App.css'; 
+import { login, logout, selectUser } from './features/userSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import Login from './Login';
+import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 
 function App({database}: {database: any}) {
   const [posts, setPosts] = useState([]);
+
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoUrl: userAuth.photoURL,
+        })
+        );
+      } else {
+         dispatch(logout());
+      }
+    });
+  },[])
+
+  
 
   useEffect(() => {
 
@@ -28,40 +50,20 @@ function App({database}: {database: any}) {
       } 
     });
   }, []);
-
-  // const user = useSelector(selectUser);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((userAuth) => {
-  //     if (userAuth) {
-  //       dispatch(
-  //         login({
-  //           email: userAuth.email,
-  //           uid: userAuth.uid,
-  //           diplayName: userAuth.displayName,
-  //           photoUrl: userAuth.photoUrl,
-  //         })
-  //       );
-  //     } else {
-  //       dispatch(logout());
-  //     }
-  //   });
-  // }, []);
   
   return (
     <div className='bg-zinc-200 '>
       <Header/>
 
-      {/* {!user ? (
-        <Login auth={auth}/>
-      ) : ( */}
-        <div className='flex mt-[35px] max-w-[1200px] ml-[20px] mr-[20px]'>
+      {!user ? (
+        <Login />
+      ) : (
+        <div className='flex justify-center mt-[35px] max-w-full'>
           <Sidebar />
           <Feed database={database} posts={posts} />
           <Wigets />
          </div>  
-       {/* )} */}
+       )}
       
     </div>
   );

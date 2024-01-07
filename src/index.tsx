@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux'
+import { store } from './app/store';
 
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBgclMBJMpeTvK0Bly1UOo2fz9EFWjx8Kk",
@@ -19,14 +22,28 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App database={database} />
+    <Provider store={store}>
+     <App database={database}  />
+    </Provider>
   </React.StrictMode>
 );
 
 reportWebVitals();
+
+
+
+
+// import App from './App'
+// import './index.css'
+
+// const root = import ReactDOM from 'react-dom/client'ReactDOM.createRoot(document.querySelector('#root'));
+
+// root.render(<App/>)
+
