@@ -6,12 +6,12 @@ import ChatIcon from '@mui/icons-material/Chat';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 
-const Post = ({ name, description, message }: {name: string, description: string, message: string}) => {
+const Post = ({ name, description, message, photoUrl }: {name: string, description: string, message: string, photoUrl: string}) => {
 
   return (
     <div className='bg-white p-[15px] mb-2.5 rounded-md'>
       <div className='flex mb-2.5'>
-      <Avatar  />
+      <Avatar  src={photoUrl} />
         <div className='ml-2.5'>
             <h2 className='text-lg font-bold'>{name}</h2>
             <p className='text-xs text-gray-500'>{description}</p>

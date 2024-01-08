@@ -6,7 +6,7 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from './Post';
-import { ref,  push} from 'firebase/database'
+import { ref,  push } from 'firebase/database'
 import { useSelector } from 'react-redux'
 import { selectUser } from './features/userSlice';
 
@@ -15,7 +15,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
 
   const [input, setInput] = useState("");
 
-  const sendPost = async (e: any) => {
+  const sendPost = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const postsRef = ref(database, 'posts');
@@ -26,7 +26,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
         description: user.email,
         message: input,
         photoUrl: user.photoUrl || "",
-      })
+      });
       console.log('Data submitted successfully with key:', newEntryData.key);
     }catch (error) {
         console.log(error);
@@ -57,6 +57,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
             name={posts.name}
             description={posts.description}
             message={posts.message}
+            photoUrl={posts.photoUrl}
           />
         })}
     </div>

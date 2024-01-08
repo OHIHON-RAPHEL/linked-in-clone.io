@@ -3,7 +3,7 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import Wigets from './Wigets'
 import Feed from './Feed'
-import {ref, onValue} from 'firebase/database'
+import {ref, onValue, query, orderByChild} from 'firebase/database'
 import { login, logout, selectUser } from './features/userSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import Login from './Login';
@@ -38,8 +38,9 @@ function App({database}: {database: any}) {
   useEffect(() => {
 
     const postsRef = ref(database, 'posts');
+    const orderedPostsRef = query(postsRef, orderByChild("desc"));
 
-    onValue(postsRef, (snapshot) => {
+    onValue(orderedPostsRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         const postArray: any = Object.keys(data).map((key) => ({
