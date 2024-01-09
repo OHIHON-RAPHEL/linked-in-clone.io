@@ -33,8 +33,6 @@ function App({database}: {database: any}) {
     });
   },[])
 
-  
-
   useEffect(() => {
 
     const postsRef = ref(database, 'posts');
