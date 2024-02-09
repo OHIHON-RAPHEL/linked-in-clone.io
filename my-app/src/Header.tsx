@@ -29,7 +29,7 @@ const Header: React.FC = () => {
          </div>
       </div>
 
-      <div className='flex'>
+      <div className='flex set'>
         <HeaderOption Icon={HomeIcon} title="Home"/>
         <HeaderOption Icon={SupervisorAccountIcon} title="My Network"/>
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs"/>
