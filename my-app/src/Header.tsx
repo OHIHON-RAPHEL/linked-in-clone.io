@@ -18,7 +18,6 @@ const Header: React.FC = () => {
     const auth = getAuth();
     auth.signOut()
   };
-
   return (
     <div className='flex justify-evenly border-b-4 gray-500 pt-2.5 pb-2.5 w-full sticky top-0 bg-white'>
       <div className='flex'>
