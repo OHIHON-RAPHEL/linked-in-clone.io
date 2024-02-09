@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className='flex justify-evenly border-b-4 gray-500 pt-2.5 pb-2.5 w-full sticky top-0 bg-white'>
+    <div className='just now flex justify-evenly border-b-4 gray-500 pt-2.5 pb-2.5 w-full sticky top-0 bg-white'>
       <div className='flex'>
          <img src='./images/linkedin.png' className='object-contain h-10 mr-5'/>
          <div className='p-2.5 flex items-center rounded text-gray-200 bg-slate-200'>
