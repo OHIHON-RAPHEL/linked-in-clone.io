@@ -58,6 +58,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
             description={posts.description}
             message={posts.message}
             photoUrl={posts.photoUrl}
+            database={database}
           />
         })}
     </div>
