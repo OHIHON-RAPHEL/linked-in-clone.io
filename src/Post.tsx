@@ -15,7 +15,6 @@ const Post = ({ name, description, message, photoUrl, database }: {name: string,
   // const navigate = useNavigate();
 
   // const {id} = useParams();
-
   const deletePost = () => {
 
     const postRef = ref(database, "posts");
