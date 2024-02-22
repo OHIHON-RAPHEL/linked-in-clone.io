@@ -18,6 +18,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
   const sendPost = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    
     const postsRef = ref(database, 'posts');
 
     try {
