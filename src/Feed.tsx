@@ -65,4 +65,5 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
     </div>
   )
 }
+
 export default Feed
