@@ -11,6 +11,7 @@ import { ref, remove } from 'firebase/database';
 // import {useNavigate} from 'react-router-dom'
 
 
+
 const Post = ({ name, description, message, photoUrl, database }: {name: string, description: string, message: string, photoUrl: string, database: any}) => {
 
   // const navigate = useNavigate();
