@@ -46,6 +46,7 @@ const Post = ({ name, description, message, photoUrl, database }: {name: string,
         </div>
       </div>
 
+
       <div className=''>
         <p className='text-base'>{message}</p>
       </div>
