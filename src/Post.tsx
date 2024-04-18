@@ -40,6 +40,7 @@ const Post = ({ name, description, message, photoUrl, database }: {name: string,
         <div className='ml-2.5'>
             <h2 className='text-lg font-bold'>{name}</h2>
             <p className='text-xs text-gray-500'>{description}</p>
+            
         </div>
         <div>
           <button onClick={deletePost} className="cursor-pointer">delete</button>
