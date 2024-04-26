@@ -51,6 +51,7 @@ const Feed = ({database, posts}: {database: any, posts: any}) => {
            <InputOption Icon={EventNoteIcon} title="Event" color="blue"/>
            <InputOption Icon={CalendarViewDayIcon} title="Write article" color="blue"/>
         </div>
+        
       </div>
         {posts.map((posts: any, index: any) => {
           return <Post
